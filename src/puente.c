@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-// Función que realiza el cálculo de conversión
-int procesar_gini(float valor_float) {
-    int entero = (int)valor_float;
-    return entero + 1;
-}
+// Declaración externa: la función se implementa en calculos.s
+extern int procesar_gini(float valor_float);
 
-// Wrapper que será llamado desde Python
+// Wrapper llamado por Python mediante ctypes
 int ejecutar_calculo(float gini_input) {
     printf("[C] Dato recibido en C desde Python: %.2f\n", gini_input);
+    
+    // Invocación a la rutina en ensamblador
     int resultado = procesar_gini(gini_input);
-    printf("[C] Resultado procesado (convertido a entero + 1): %d\n", resultado);
+    
+    printf("[C -> ASM] Resultado procesado en Ensamblador (entero + 1): %d\n", resultado);
     return resultado;
 }
