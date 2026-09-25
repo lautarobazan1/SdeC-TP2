@@ -1,4 +1,5 @@
-*test_gdb
+.gdb_history
+test_gdb
 *.so
 *.o
 *.out
