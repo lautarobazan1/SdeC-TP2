@@ -48,17 +48,21 @@ TP2/
    as --64 -g -o src/calculos.o src/calculos.s
 
 2. **Generar la librería dinámica compartida (.so):**
+   
+   ```bash
    gcc -shared -fPIC -g -o src/libpuente.so src/puente.c src/calculos.o
 
 2. **Ejecutar el programa principal:**
+   
+   ```bash
    python3 src/main.py
 
 ### Opción B: Ejecución de Prueba en C Puro (Entorno GDB)
 
-Para la verificación directa con el depurador:
-
-gcc -g -O0 -o test_gdb src/main_test.c src/calculos.o
-./test_gdb
+1. Para la verificación directa con el depurador:
+   
+   ```bash
+   gcc -g -O0 -o test_gdb src/main_test.c src/calculos.o ./test_gdb
 
 ---
 
