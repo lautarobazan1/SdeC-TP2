@@ -27,6 +27,7 @@ Este proyecto implementa una solución en **arquitectura de tres capas** para ob
 
 ## 3. Estructura del Repositorio
 
+```text
 TP2/
 ├── src/
 │   ├── main.py          # Script de Python (Consulta API + Invocación Ctypes)
@@ -35,6 +36,7 @@ TP2/
 │   └── main_test.c      # Programa en C puro para inspección con GDB
 ├── .gitignore           # Exclusión de archivos binarios (.o, .so, test_gdb)
 └── README.md            # Documentación general y evidencia
+```
 
 ---
 
@@ -62,9 +64,11 @@ TP2/
 1. Para la verificación directa con el depurador:
    
    ```bash
-   gcc -g -O0 -o test_gdb src/main_test.c src/calculos.o ./test_gdb
+   gcc -g -O0 -o test_gdb src/main_test.c src/calculos.o 
+   ./test_gdb
 
 ---
 
 ## 5. Inspección Detallada del Stack Frame y Registros en GDB
 Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable test_gdb utilizando la interfaz GDB Dashboard para analizar el comportamiento del Stack Frame y los registros según el estándar System V AMD64 ABI.
+
