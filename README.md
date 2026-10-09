@@ -72,3 +72,7 @@ TP2/
 ## 5. Inspección Detallada del Stack Frame y Registros en GDB
 Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable test_gdb utilizando la interfaz GDB Dashboard para analizar el comportamiento del Stack Frame y los registros según el estándar System V AMD64 ABI.
 
+* Datos de Entrada de la Prueba:
+* Parámetro flotante ingresado: 42.70
+
+* Llamada desde C: procesar_gini(42.70) desde src/main_test.c
