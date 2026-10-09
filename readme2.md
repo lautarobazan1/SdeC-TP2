@@ -42,7 +42,7 @@ TP2/
 
 ### Opción A: Flujo Completo (Python → C → Assembly)
 
-1. **Ensamblar el código x86_64:**
+1. **Ensamblar el código x86_64:** /
    
    as --64 -g -o src/calculos.o src/calculos.s
 
