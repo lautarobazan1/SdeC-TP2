@@ -10,7 +10,7 @@
 ---
 
 
-## 📌 1. Descripción del Proyecto y Arquitectura
+## 1. Descripción del Proyecto y Arquitectura
 
 Este proyecto implementa una solución en **arquitectura de tres capas** para obtener, transmitir y procesar el indicador socioeconómico **GINI** del Banco Mundial:
 
@@ -24,3 +24,41 @@ Este proyecto implementa una solución en **arquitectura de tres capas** para ob
    Recibe el valor del índice GINI en punto flotante (`float`), realiza la conversión a entero truncado, le incrementa una unidad (`+1`) y devuelve el resultado final aplicando la convención de llamadas **System V AMD64 ABI**.
 
 ---
+
+## 3. Estructura del Repositorio
+
+TP2/
+├── src/
+│   ├── main.py          # Script de Python (Consulta API + Invocación Ctypes)
+│   ├── puente.c         # Puente de enlace en C
+│   ├── calculos.s       # Rutina en Assembly x86_64 (procesar_gini)
+│   └── main_test.c      # Programa en C puro para inspección con GDB
+├── .gitignore           # Exclusión de archivos binarios (.o, .so, test_gdb)
+└── README.md            # Documentación general y evidencia
+
+---
+
+## 4. Compilación y Ejecución
+
+### Opción A: Flujo Completo (Python → C → Assembly)
+
+1. **Ensamblar el código x86_64:**
+   as --64 -g -o src/calculos.o src/calculos.s
+
+2. **Generar la librería dinámica compartida (.so):**
+   gcc -shared -fPIC -g -o src/libpuente.so src/puente.c src/calculos.o
+
+2. **Ejecutar el programa principal:**
+   python3 src/main.py
+
+### Opción B: Ejecución de Prueba en C Puro (Entorno GDB)
+
+Para la verificación directa con el depurador:
+
+gcc -g -O0 -o test_gdb src/main_test.c src/calculos.o
+./test_gdb
+
+---
+
+## 5. Inspección Detallada del Stack Frame y Registros en GDB
+Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable test_gdb utilizando la interfaz GDB Dashboard para analizar el comportamiento del Stack Frame y los registros según el estándar System V AMD64 ABI.
