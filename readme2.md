@@ -42,8 +42,9 @@ TP2/
 
 ### Opción A: Flujo Completo (Python → C → Assembly)
 
-1. **Ensamblar el código x86_64:** /
-   
+1. **Ensamblar el código x86_64:**
+
+   ```bash
    as --64 -g -o src/calculos.o src/calculos.s
 
 2. **Generar la librería dinámica compartida (.so):**
