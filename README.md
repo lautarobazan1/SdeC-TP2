@@ -126,7 +126,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 4. Incremento Aritmético (src/calculos.s)
 
-<img src="./src/images/1.png" alt="Imagen 1" width="500">
+<img src="./src/images/4.png" alt="Imagen 4" width="500">
 
    - Instrucción: `addl $1, %eax`
    - **Comportamiento:**
@@ -135,7 +135,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 5. Epílogo y Limpieza del Stack (src/calculos.s)
 
-<img src="./src/images/1.png" alt="Imagen 1" width="500">
+<img src="./src/images/5.png" alt="Imagen 5" width="500">
 
    - Instrucciones: `popq %rbp` y `ret`
    - **Comportamiento:**
@@ -144,7 +144,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 6. Verificación Final del Valor Devuelto
 
-<img src="./src/images/1.png" alt="Imagen 1" width="500">
+<img src="./src/images/7.png" alt="Imagen 7" width="500">
 
    - Al retornar a la función en C, se inspecciona el registro acumulador de salida:
    ```text
