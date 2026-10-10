@@ -126,7 +126,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 4. Incremento Aritmético (src/calculos.s)
 
-<img src="./src/images/4.png" alt="Imagen 4" width="500">
+<img src="./src/images/4.png" alt="Imagen 4" width="600">
 
    - Instrucción: `addl $1, %eax`
    - **Comportamiento:**
@@ -135,7 +135,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 5. Epílogo y Limpieza del Stack (src/calculos.s)
 
-<img src="./src/images/5.png" alt="Imagen 5" width="500">
+<img src="./src/images/5.png" alt="Imagen 5" width="700">
 
    - Instrucciones: `popq %rbp` y `ret`
    - **Comportamiento:**
