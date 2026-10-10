@@ -25,6 +25,24 @@ Este proyecto implementa una solución en **arquitectura de tres capas** para ob
 
 ---
 
+## 🛠️ 2. Requisitos del Sistema y Dependencias
+
+Para la correcta compilación, enlace y depuración del sistema en entornos **Linux (x86_64)**, se requiere:
+
+* **Compilador y Herramientas GNU:** `gcc` (soporte de 64 bits), `as` (GNU Assembler).
+* **Entorno Python:** Python 3.8+ con el paquete `requests`.
+* **Depurador:** `gdb` con interfaz visual `gdb-dashboard`.
+
+Instalación de paquetes requeridos en Debian/Ubuntu:
+   ```bash
+   sudo apt update
+   sudo apt install build-essential gdb python3 python3-pip
+   pip install requests
+   ```
+
+
+---
+
 ## 3. Estructura del Repositorio
 
 ```text
@@ -79,6 +97,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 **Análisis Paso a Paso de la Rutina (src/calculos.s)**
 
 1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
    * Instrucción a ejecutar: `pushq %rbp`
    * **Estado inicial:**
       * El argumento `42.70` ingresa en el registro flotante `%xmm0` respetando la convención *System V ABI.*
