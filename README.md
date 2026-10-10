@@ -99,50 +99,56 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
 
 <img src="./src/images/1.png" alt="Imagen 1" width="500">
-   * Instrucción a ejecutar: `pushq %rbp`
-   * **Estado inicial:**
-      * El argumento `42.70` ingresa en el registro flotante `%xmm0` respetando la convención *System V ABI.*
-      * El puntero de pila `%rsp` se encuentra en `0x00007fffffffdcb8`.
-      * La pila indica que la función actual fue invocada desde main+76 (src/main_test.c).
-
-1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
-
-<img src="./src/images/1.png" alt="Imagen 1" width="500">
 
 - Instrucción a ejecutar: `pushq %rbp`
 - **Estado inicial:**
   - El argumento `42.70` ingresa en el registro flotante `%xmm0` respetando la convención *System V ABI.*
   - El puntero de pila `%rsp` se encuentra en `0x00007fffffffdcb8`.
   - La pila indica que la función actual fue invocada desde main+76 (src/main_test.c).
-  
-2. Reservar Marco de Pila (src/calculos.s:7) 
-   * Instrucción: `movq %rsp, %rbp`
-   * **Modificación de Memoria:**
-      * Al ejecutarse pushq `%rbp`, el puntero de la pila `%rsp` se desplaza en 8 bytes hacia direcciones más bajas, pasando de `0x00007fffffffdcb8` a `0x00007fffffffdcb0`.
-      * Se guarda la dirección base del marco anterior en la cima de la pila y `%rbp` toma el valor de `%rsp` (0x00007fffffffdcb0) consolidando el nuevo Stack Frame.
+
+2. Reservar Marco de Pila (`src/calculos.s`) 
+
+<img src="./src/images/2.png" alt="Imagen 2" width="500">
+
+- Instrucción: `movq %rsp, %rbp`
+- **Modificación de Memoria:**
+   - Al ejecutarse pushq `%rbp`, el puntero de la pila `%rsp` se desplaza en 8 bytes hacia direcciones más bajas, pasando de `0x00007fffffffdcb8` a `0x00007fffffffdcb0`.
+   - Se guarda la dirección base del marco anterior en la cima de la pila y `%rbp` toma el valor de `%rsp` (0x00007fffffffdcb0) consolidando el nuevo Stack Frame.
 
 3. Conversión de Flotante a Entero (`sr c/calculos.s`)
-   * Instrucción: `cvttss2si %xmm0, %eax`
-   * **Comportamiento:**
-      * Toma el valor escalar `42.70` del registro `%xmm0`, realiza el truncamiento hacia cero y guarda la parte entera en el registro de 32 bits `%eax`.
-      * El registro `%rax` actualiza su contenido a `0x000000000000002a` (donde `0x2a` en hexadecimal equivale exactamente a `42` en decimal).
+
+<img src="./src/images/3.png" alt="Imagen 3" width="500">
+
+   - Instrucción: `cvttss2si %xmm0, %eax`
+   - **Comportamiento:**
+      - Toma el valor escalar `42.70` del registro `%xmm0`, realiza el truncamiento hacia cero y guarda la parte entera en el registro de 32 bits `%eax`.
+      - El registro `%rax` actualiza su contenido a `0x000000000000002a` (donde `0x2a` en hexadecimal equivale exactamente a `42` en decimal).
 
 4. Incremento Aritmético (src/calculos.s)
-   * Instrucción: `addl $1, %eax`
-   * **Comportamiento:**
-      * Suma una unidad directa al contenido de `%eax`.
-      * El valor de `%rax` cambia de `0x2a` (42) a `0x000000000000002b` (donde `0x2b` en hexadecimal equivale a **43** en decimal).
+
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
+
+   - Instrucción: `addl $1, %eax`
+   - **Comportamiento:**
+      - Suma una unidad directa al contenido de `%eax`.
+      - El valor de `%rax` cambia de `0x2a` (42) a `0x000000000000002b` (donde `0x2b` en hexadecimal equivale a **43** en decimal).
 
 5. Epílogo y Limpieza del Stack (src/calculos.s)
-   * Instrucciones: `popq %rbp` y `ret`
-   * **Comportamiento:**
-      * `popq %rbp` restaura el puntero base original del llamador (main) y restablece `%rsp` a `0x00007fffffffdcb8`.
-      * `ret` desapila la dirección de retorno y devuelve la ejecución a main.
+
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
+
+   - Instrucciones: `popq %rbp` y `ret`
+   - **Comportamiento:**
+      - `popq %rbp` restaura el puntero base original del llamador (main) y restablece `%rsp` a `0x00007fffffffdcb8`.
+      - `ret` desapila la dirección de retorno y devuelve la ejecución a main.
 
 6. Verificación Final del Valor Devuelto
-   * Al retornar a la función en C, se inspecciona el registro acumulador de salida:
+
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
+
+   - Al retornar a la función en C, se inspecciona el registro acumulador de salida:
    ```text
    (gdb) print $eax
    $1 = 43
    ```
-   * **Conclusión:** Se verifica que la conversión truncada de `42.70` dio `42`, se le incrementó `1` dando como resultado final `43`, entregado correctamente a C a través del registro `%eax`.
+   - **Conclusión:** Se verifica que la conversión truncada de `42.70` dio `42`, se le incrementó `1` dando como resultado final `43`, entregado correctamente a C a través del registro `%eax`.
