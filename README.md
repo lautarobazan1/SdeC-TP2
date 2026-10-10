@@ -98,13 +98,23 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
 
-* <img src="./src/images/1.png" alt="Imagen 1" width="500">
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
    * Instrucción a ejecutar: `pushq %rbp`
    * **Estado inicial:**
       * El argumento `42.70` ingresa en el registro flotante `%xmm0` respetando la convención *System V ABI.*
       * El puntero de pila `%rsp` se encuentra en `0x00007fffffffdcb8`.
-      * La pila indica que la función actual fue invocada desde main+76 (src/main_test.c:9).
+      * La pila indica que la función actual fue invocada desde main+76 (src/main_test.c).
 
+1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
+
+<img src="./src/images/1.png" alt="Imagen 1" width="500">
+
+- Instrucción a ejecutar: `pushq %rbp`
+- **Estado inicial:**
+  - El argumento `42.70` ingresa en el registro flotante `%xmm0` respetando la convención *System V ABI.*
+  - El puntero de pila `%rsp` se encuentra en `0x00007fffffffdcb8`.
+  - La pila indica que la función actual fue invocada desde main+76 (src/main_test.c).
+  
 2. Reservar Marco de Pila (src/calculos.s:7) 
    * Instrucción: `movq %rsp, %rbp`
    * **Modificación de Memoria:**
