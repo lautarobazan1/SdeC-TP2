@@ -25,7 +25,7 @@ Este proyecto implementa una solución en **arquitectura de tres capas** para ob
 
 ---
 
-## 🛠️ 2. Requisitos del Sistema y Dependencias
+## 2. Requisitos del Sistema y Dependencias
 
 Para la correcta compilación, enlace y depuración del sistema en entornos **Linux (x86_64)**, se requiere:
 
@@ -96,7 +96,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 **Análisis Paso a Paso de la Rutina (src/calculos.s)**
 
-1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
+1. **Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)**
 
 <img src="./src/images/1.png" alt="Imagen 1" width="800">
 
@@ -106,7 +106,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
   - El puntero de pila `%rsp` se encuentra en `0x00007fffffffdcb8`.
   - La pila indica que la función actual fue invocada desde main+76 (src/main_test.c).
 
-2. Reservar Marco de Pila (`src/calculos.s`) 
+2. **Reservar Marco de Pila (`src/calculos.s`)**
 
 <img src="./src/images/2.png" alt="Imagen 2" width="800">
 
@@ -115,7 +115,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
    - Al ejecutarse pushq `%rbp`, el puntero de la pila `%rsp` se desplaza en 8 bytes hacia direcciones más bajas, pasando de `0x00007fffffffdcb8` a `0x00007fffffffdcb0`.
    - Se guarda la dirección base del marco anterior en la cima de la pila y `%rbp` toma el valor de `%rsp` (0x00007fffffffdcb0) consolidando el nuevo Stack Frame.
 
-3. Conversión de Flotante a Entero (`sr c/calculos.s`)
+3. **Conversión de Flotante a Entero (`sr c/calculos.s`)**
 
 <img src="./src/images/3.png" alt="Imagen 3" width="800">
 
@@ -124,7 +124,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
       - Toma el valor escalar `42.70` del registro `%xmm0`, realiza el truncamiento hacia cero y guarda la parte entera en el registro de 32 bits `%eax`.
       - El registro `%rax` actualiza su contenido a `0x000000000000002a` (donde `0x2a` en hexadecimal equivale exactamente a `42` en decimal).
 
-4. Incremento Aritmético (src/calculos.s)
+4. **Incremento Aritmético (src/calculos.s)**
 
 <img src="./src/images/4.png" alt="Imagen 4" width="800">
 
@@ -133,7 +133,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
       - Suma una unidad directa al contenido de `%eax`.
       - El valor de `%rax` cambia de `0x2a` (42) a `0x000000000000002b` (donde `0x2b` en hexadecimal equivale a **43** en decimal).
 
-5. Epílogo y Limpieza del Stack (src/calculos.s)
+5. **Epílogo y Limpieza del Stack (src/calculos.s)**
 
 <img src="./src/images/5.png" alt="Imagen 5" width="800">
 
@@ -142,7 +142,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
       - `popq %rbp` restaura el puntero base original del llamador (main) y restablece `%rsp` a `0x00007fffffffdcb8`.
       - `ret` desapila la dirección de retorno y devuelve la ejecución a main.
 
-6. Verificación Final del Valor Devuelto
+6. **Verificación Final del Valor Devuelto**
 
 <img src="./src/images/7.png" alt="Imagen 7" width="800">
 
