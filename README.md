@@ -117,7 +117,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 3. Conversión de Flotante a Entero (`sr c/calculos.s`)
 
-<img src="./src/images/3.png" alt="Imagen 3" width="500">
+<img src="./src/images/3.png" alt="Imagen 3" width="900">
 
    - Instrucción: `cvttss2si %xmm0, %eax`
    - **Comportamiento:**
@@ -144,7 +144,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 6. Verificación Final del Valor Devuelto
 
-<img src="./src/images/7.png" alt="Imagen 7" width="500">
+<img src="./src/images/7.png" alt="Imagen 7" width="800">
 
    - Al retornar a la función en C, se inspecciona el registro acumulador de salida:
    ```text
