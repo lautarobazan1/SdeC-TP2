@@ -98,7 +98,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 1. Punto de Interrupción y Prólogo (procesar_gini - Dirección `0x00005555555551a8`)
 
-<img src="./src/images/1.png" alt="Imagen 1" width="500">
+<img src="./src/images/1.png" alt="Imagen 1" width="800">
 
 - Instrucción a ejecutar: `pushq %rbp`
 - **Estado inicial:**
@@ -108,7 +108,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 2. Reservar Marco de Pila (`src/calculos.s`) 
 
-<img src="./src/images/2.png" alt="Imagen 2" width="500">
+<img src="./src/images/2.png" alt="Imagen 2" width="800">
 
 - Instrucción: `movq %rsp, %rbp`
 - **Modificación de Memoria:**
@@ -117,7 +117,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 3. Conversión de Flotante a Entero (`sr c/calculos.s`)
 
-<img src="./src/images/3.png" alt="Imagen 3" width="900">
+<img src="./src/images/3.png" alt="Imagen 3" width="800">
 
    - Instrucción: `cvttss2si %xmm0, %eax`
    - **Comportamiento:**
@@ -126,7 +126,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 4. Incremento Aritmético (src/calculos.s)
 
-<img src="./src/images/4.png" alt="Imagen 4" width="600">
+<img src="./src/images/4.png" alt="Imagen 4" width="800">
 
    - Instrucción: `addl $1, %eax`
    - **Comportamiento:**
@@ -135,7 +135,7 @@ Se realizó una sesión de depuración paso a paso (stepi) sobre el ejecutable t
 
 5. Epílogo y Limpieza del Stack (src/calculos.s)
 
-<img src="./src/images/5.png" alt="Imagen 5" width="700">
+<img src="./src/images/5.png" alt="Imagen 5" width="800">
 
    - Instrucciones: `popq %rbp` y `ret`
    - **Comportamiento:**
